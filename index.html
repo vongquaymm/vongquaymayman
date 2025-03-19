@@ -25,8 +25,9 @@
         </div>
         <script>
             //Thông số vòng quay
-            let count = 1;
-            let duration = 5; //Thời gian kết thúc vòng quay
+            let count = 0;
+            let nguoitrung = 0
+            let duration = 10; //Thời gian kết thúc vòng quay
             let spins    = 15; //Quay nhanh hay chậm 3, 8, 15
             let theWheel = new Winwheel({
                 'numSegments'  : 10,     // Chia 8 phần bằng nhau
@@ -91,10 +92,11 @@
             function stopAngle() {
                 let start;
 
-                if (count % 3 == 0) {
+                if (count > 7) {
                     start = 73; // Đặt giá trị cố định nếu count chia hết cho 3
                 } else {
                     start = Math.floor(Math.random() * 359); // Giá trị ngẫu nhiên từ 0 đến 358
+                    nguoitrung = nguoitrung + 1
                 }
 
                 let stop = Math.floor(Math.random() * 34); // Giá trị từ 0 đến 37
