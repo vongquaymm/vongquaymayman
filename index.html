@@ -33,7 +33,7 @@
                 'numSegments'  : 10,     // Chia 8 phần bằng nhau
                 'outerRadius'  : 212,   // Đặt bán kính vòng quay
                 'textFontSize' : 15,    // Đặt kích thước chữ
-                'rotationAngle': Math.floor(Math.random() * 359),     // Đặt góc vòng quay từ 0 đến 360 độ.
+                'rotationAngle': 0,     // Đặt góc vòng quay từ 0 đến 360 độ.
                 'segments'     :        // Các thành phần bao gồm màu sắc và văn bản.
                 [
                    {'fillStyle' : '#eae56f', 'text' : 'Trà Tắc'},
@@ -90,22 +90,28 @@
             
             //stopAngle
             function stopAngle() {
-                let start;
+                let totalSegments = 10; // Số phần thưởng
+                let segmentAngle = 360 / totalSegments; // Mỗi phần chiếm 36 độ
 
-                if (count > 7) {
-                    start = 73; // Đặt giá trị cố định nếu count chia hết cho 3
+                let chosenSegment;
+
+                // Nếu count chia hết cho 3, chọn phần cố định (ví dụ: phần số 2)
+                if (count % 3 === 0) {
+                    chosenSegment = 2;
                 } else {
-                    start = Math.floor(Math.random() * 359); // Giá trị ngẫu nhiên từ 0 đến 358
-                    nguoitrung = nguoitrung + 1
+                    chosenSegment = Math.floor(Math.random() * totalSegments+1);
+                    nguoitrung += 1; // Tăng biến đếm số lần trúng
                 }
 
-                let stop = Math.floor(Math.random() * 34); // Giá trị từ 0 đến 37
-                let stopAt = start + stop;
-                
-                theWheel.animation.stopAngle = stopAt; // Giả sử theWheel tồn tại
+                // Tính góc dừng: đảm bảo nằm trong phần đã chọn
+                let stopAt = (chosenSegment * segmentAngle) + Math.floor(Math.random() * segmentAngle+1);
 
-                count = count + 1; // Tăng biến đếm
-            }
+                // Gán giá trị góc dừng cho theWheel (giả sử theWheel tồn tại)
+                theWheel.animation.stopAngle = stopAt;
+
+                // Tăng biến count
+                count++;
+}
             //startSpin
             function startSpin() {
                 // Ensure that spinning can't be clicked again while already running.
