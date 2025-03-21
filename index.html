@@ -3,7 +3,7 @@
         <title>Vòng Quay Gian Hàng</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="main.css" type="text/css" />
-        <link type="icon/x-icon" href="phuongcon.ico" rel="shortcut icon" />
+        <link type="icon/x-icon" href="favicon.ico" rel="shortcut icon" />
         <script type="text/javascript" src="Winwheel.min.js"></script>
         <script src="TweenMax.min.js"></script>
     </head>
@@ -28,7 +28,7 @@
             let count = 0;
             let nguoitrung = 0
             let duration = 10; //Thời gian kết thúc vòng quay
-            let spins    = 8; //Quay nhanh hay chậm 3, 8, 15
+            let spins    = 15; //Quay nhanh hay chậm 3, 8, 15
             let theWheel = new Winwheel({
                 'numSegments'  : 10,     // Chia 8 phần bằng nhau
                 'outerRadius'  : 212,   // Đặt bán kính vòng quay
@@ -45,7 +45,7 @@
                    {'fillStyle' : '#7de6ef', 'text' : 'Chè Khúc Bạch'},
                    {'fillStyle' : '#e7706f', 'text' : 'Sữa Chua'},
                    {'fillStyle' : '#7de6ef', 'text' : 'Chúc Bạn May Mắn'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Combo 5 món'}
+                   {'fillStyle' : '#89f26e', 'text' : 'Trái Cây Lạnh'}
                 ],
                 'animation' : {
                     'type'     : 'spinToStop',
@@ -98,22 +98,16 @@
                 let chosenSegment;
 
                 // Nếu count chia hết cho 3, chọn phần cố định (ví dụ: phần số 2)
-                if (count == 20){
-                    chosenSegment = 10;
+                if (count % 3 === 0) {
+                    chosenSegment = dsden[Math.floor(Math.random()*dsden.length)];
+                    // chosenSegment = 5
                     stopAt = (chosenSegment * segmentAngle) + 1;
+                    console.log(chosenSegment);
+                } else {
+                    chosenSegment = Math.floor(Math.random() * totalSegments+1);
+                    nguoitrung += 1; // Tăng biến đếm số lần trúng
+                    stopAt = (chosenSegment * segmentAngle) + Math.floor(Math.random() * segmentAngle+1);
                 }
-                else{
-                    if (count % 3 === 0) {
-                        chosenSegment = dsden[Math.floor(Math.random()*dsden.length)];
-                        // chosenSegment = 5
-                        stopAt = (chosenSegment * segmentAngle) + 1;
-                        console.log(chosenSegment);
-                    } else {
-                        chosenSegment = Math.floor(Math.random() * totalSegments+1);
-                        nguoitrung += 1; // Tăng biến đếm số lần trúng
-                        stopAt = (chosenSegment * segmentAngle) + Math.floor(Math.random() * segmentAngle+1);
-                    }
-                Ư
 
                 // Tính góc dừng: đảm bảo nằm trong phần đã chọn
                 
