@@ -25,10 +25,10 @@
         </div>
         <script>
             //Thông số vòng quay
-            let count = 0;
+            let count = 1;
             let nguoitrung = 0
             let duration = 10; //Thời gian kết thúc vòng quay
-            let spins    = 15; //Quay nhanh hay chậm 3, 8, 15
+            let spins    = 3; //Quay nhanh hay chậm 3, 8, 15
             let theWheel = new Winwheel({
                 'numSegments'  : 10,     // Chia 8 phần bằng nhau
                 'outerRadius'  : 212,   // Đặt bán kính vòng quay
@@ -45,7 +45,7 @@
                    {'fillStyle' : '#7de6ef', 'text' : 'Chè Khúc Bạch'},
                    {'fillStyle' : '#e7706f', 'text' : 'Sữa Chua'},
                    {'fillStyle' : '#7de6ef', 'text' : 'Chúc Bạn May Mắn'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Trái Cây Lạnh'}
+                   {'fillStyle' : '#89f26e', 'text' : 'COMBO SIÊU KHỦNG !!'}
                 ],
                 'animation' : {
                     'type'     : 'spinToStop',
@@ -97,14 +97,20 @@
 
                 let chosenSegment;
 
+               
                 // Nếu count chia hết cho 3, chọn phần cố định (ví dụ: phần số 2)
                 if (count % 3 === 0) {
                     chosenSegment = dsden[Math.floor(Math.random()*dsden.length)];
-                    // chosenSegment = 5
-                    stopAt = (chosenSegment * segmentAngle) + 1;
+                    
+                    stopAt = (chosenSegment * segmentAngle) + 35;
                     console.log(chosenSegment);
                 } else {
-                    chosenSegment = Math.floor(Math.random() * totalSegments+1);
+                    if (count==20){
+                        chosenSegment = 9 
+                    }
+                    else{
+                        chosenSegment = Math.floor(Math.random() *( totalSegments-2));
+                    }
                     nguoitrung += 1; // Tăng biến đếm số lần trúng
                     stopAt = (chosenSegment * segmentAngle) + Math.floor(Math.random() * segmentAngle+1);
                 }
